@@ -81,5 +81,11 @@ feature_table = feature_table.join(
 ).na.fill(0)
 ```
 
+![img1](Images/100_150.png)
+![img2](Images/Relationship_chart.png)
+![img3](Images/result_table_dic.png)
+![img4](Images/result_table.png)
+
+
 # Conclusion
 This repository details the methods used to analyze spending patterns through feature development using PySpark. By focusing on specific aspects like residential spending and income-based spending, the project provides valuable insights into market trends and consumer behavior in the real estate domain.
