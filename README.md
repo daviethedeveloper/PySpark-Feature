@@ -2,6 +2,27 @@
 Use Data bricks to filter out data and create a feature
 
 
+## Income Spend Map
+
+This feature, called "Income Spend Map", provides insights into the average spend per customer based on different income ranges. 
+
+
+Here's how it was created:
+```
+1. Unmap BUCKETED_CUSTOMER_INCOMES: Extract income data from `poi_spend_visits` by exploding the `BUCKETED_CUSTOMER_INCOMES` column to separate income ranges and their corresponding values.
+
+2. Unmap MEAN_SPEND_PER_CUSTOMER_BY_INCOME: Similarly, extract spend data from `poi_spend_visits` by exploding the `MEAN_SPEND_PER_CUSTOMER_BY_INCOME` column to obtain spend values for each income range.
+
+3. Aggregate Data: Join the unmapped income and spend data based on "TRACTCE" and "income" columns. Then, group the data by "TRACTCE" and pivot the "income" column to create separate columns for each income range. Aggregate the spend values using the first value encountered for each income range.
+
+4. Define Income Ranges: Define the income ranges to be considered, such as "<25k", "25-45k", "45-60k", etc.
+
+5. Create Map Column: Using `create_map()` function, create a map where each income range is paired with its corresponding spend value. This map will serve as the "Income Spend Map" feature.
+
+6. Join with feature_table: Join the newly created income spend map with the existing `feature_table` based on the "TRACTCE" column, ensuring that each region gets its income spend map.
+
+7. Handle Missing Values: Fill any missing values resulting from the join operation with zeros to maintain data integrity.
+```
 
 ```pyspark
 from pyspark.sql import functions as F
